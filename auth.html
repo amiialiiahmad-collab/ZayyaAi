@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZAYYA AI · {{ 'Create account' if mode == 'register' else 'Welcome back' }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="auth-body"><div class="glow glow-one"></div><div class="glow glow-two"></div>
+<main class="auth-shell">
+  <a class="brand" href="/"><span class="brand-mark">Z</span><span>ZAYYA<span class="accent"> AI</span></span></a>
+  <section class="auth-card">
+    <div class="eyebrow">YOUR AI WORKSPACE</div>
+    <h1>{{ 'Create your account' if mode == 'register' else 'Welcome back.' }}</h1>
+    <p class="muted">{{ 'Start a smarter conversation.' if mode == 'register' else 'Sign in to continue your conversations.' }}</p>
+    {% with messages = get_flashed_messages() %}{% if messages %}<div class="notice">{{ messages[0] }}</div>{% endif %}{% endwith %}
+    <form method="post">
+      <label>Email address</label><input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      <label>Password</label><input type="password" name="password" placeholder="At least 8 characters" required minlength="8" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}">
+      <button class="primary full" type="submit">{{ 'Create account' if mode == 'register' else 'Sign in' }} <span>→</span></button>
+    </form>
+    <p class="switch">{{ 'Already have an account?' if mode == 'register' else "Don't have an account?" }}
+      <a href="{{ '/login' if mode == 'register' else '/register' }}">{{ 'Sign in' if mode == 'register' else 'Create account' }}</a>
+    </p>
+  </section>
+  <p class="tiny center">Private conversations · Your history stays with your account</p>
+</main></body></html>
