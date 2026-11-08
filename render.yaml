@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: zayya-ai
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: YAKAL_API_KEY
+        sync: false
+      - key: YAKAL_MODEL
+        value: glm-5.3-flash
+      - key: DATABASE_URL
+        fromDatabase:
+          name: zayya-db
+          property: connectionString
+
+databases:
+  - name: zayya-db
+    plan: free
+    databaseName: zayya
+    user: zayya
