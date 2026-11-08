@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZAYYA AI</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body class="app-body">
+<aside class="sidebar" id="sidebar">
+  <a class="brand side-brand" href="/chat"><span class="brand-mark">Z</span><span>ZAYYA<span class="accent"> AI</span></span></a>
+  <button class="new-chat" id="newChat">＋ <span>New chat</span></button>
+  <div class="side-label">YOUR HISTORY</div><div class="history" id="history">
+  {% for c in chats %}<button class="history-item" data-id="{{ c.id }}">{{ c.title }}</button>{% else %}<p class="empty-history">Your conversations will appear here.</p>{% endfor %}
+  </div>
+  <div class="side-bottom"><div class="profile-dot">Z</div><div class="profile-info"><b>My account</b><small>Signed in</small></div><form action="/logout" method="post"><button class="icon-button" title="Sign out">↗</button></form></div>
+</aside>
+<main class="workspace">
+  <header class="topbar"><button class="icon-button mobile-menu" id="menuBtn">☰</button><div><span class="status-dot"></span><span class="muted small">ZAYYA AI · ONLINE</span></div><button class="theme-toggle" id="themeToggle">◐</button></header>
+  <section class="chat-area" id="chatArea">
+    <div class="welcome" id="welcome"><div class="hero-orb">✳</div><div class="eyebrow">A NEW WAY TO THINK</div><h1>What can I help<br><span class="gradient-text">you explore?</span></h1><p class="muted">Ask anything. Discover ideas. Make something brilliant.</p>
+    <div class="suggestions"><button data-prompt="Explain a difficult topic in simple words.">✦ Explain something</button><button data-prompt="Help me write a clear and engaging paragraph.">✎ Write with me</button><button data-prompt="Give me creative ideas for a new project.">✧ Find inspiration</button></div></div>
+    <div class="messages" id="messages"></div>
+  </section>
+  <form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message ZAYYA AI…" required></textarea><button class="send-button" id="sendBtn" type="submit">↑</button><div class="composer-note">AI can make mistakes. Check important information.</div></form>
+</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script></body></html>
